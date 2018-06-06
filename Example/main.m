@@ -24,10 +24,28 @@
 
 int main(__unused int argc, __unused const char *argv[]) {
     @autoreleasepool {
-        NSData *originalData = [@"Look out! It's..." dataUsingEncoding:NSUTF8StringEncoding];
-        NSData *compressedData = [originalData dataByGZipCompressingWithError:nil];
-        NSData *decompressedData = [compressedData dataByGZipDecompressingDataWithError:nil];
-        NSLog(@"%@ %@", [[NSString alloc] initWithData:decompressedData encoding:NSUTF8StringEncoding], @"Godzippa!");
+        /*
+         2018-06-06 21:09:33.942772+0800 Godzippa Example[87994:7539339] 测试1 ： originalData.length = 17 , compressedData.length = 37 , decompressedData.length = 17
+         2018-06-06 21:09:39.155985+0800 Godzippa Example[87994:7539339] 测试1 ： originalData.length = 3486 , compressedData.length = 75 , decompressedData.length = 3486
+         Program ended with exit code: 0
+         */
+        
+        // 测试1 ， 压缩后会变大
+        {
+            NSData *originalData = [@"Look out! It's..." dataUsingEncoding:NSUTF8StringEncoding];
+            NSData *compressedData = [originalData dataByGZipCompressingWithError:nil];
+            NSData *decompressedData = [compressedData dataByGZipDecompressingDataWithError:nil];
+            NSLog(@"%@ %@", [[NSString alloc] initWithData:decompressedData encoding:NSUTF8StringEncoding], @"Godzippa!");
+            NSLog(@"测试1 ： originalData.length = %zd , compressedData.length = %zd , decompressedData.length = %zd",originalData.length,compressedData.length,decompressedData.length);
+        }
+        //测试2  压缩后会减小
+        {
+            NSData *originalData = [@"Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's... ook out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's... ook out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's... ook out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's... ook out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's...Look out! It's... " dataUsingEncoding:NSUTF8StringEncoding];
+            NSData *compressedData = [originalData dataByGZipCompressingWithError:nil];
+            NSData *decompressedData = [compressedData dataByGZipDecompressingDataWithError:nil];
+//            NSLog(@"%@ %@", [[NSString alloc] initWithData:decompressedData encoding:NSUTF8StringEncoding], @"Godzippa!");
+            NSLog(@"测试1 ： originalData.length = %zd , compressedData.length = %zd , decompressedData.length = %zd",originalData.length,compressedData.length,decompressedData.length);
+        }
     }
 
     return 0;
